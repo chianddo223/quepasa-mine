@@ -15,6 +15,7 @@
 
         table {
             border-collapse: collapse;
+            background: #888;
         }
 
         td {
@@ -29,8 +30,9 @@
         td#mine {
             font-family: 'CookieRun-Regular';
             font-size: 6vw;
-            color: white;
-            background: black;
+            color: #888;
+            background: #888;
+            border-radius: 131%;
         }
 
         td.opened {
@@ -62,8 +64,9 @@
         for (let i = 0; i < numRows; i++) {
             const $tr = document.createElement('tr');
             const cells = [];
-            for (let j = 0; j < numClos; j++) {
+            for (let j = 0; j < numClos; j++) { // 각각의 td가 생성되면서 특성부여받음.
                 const $td = document.createElement('td');
+                $td.addEventListener('click', makeVisible);
                 $td.classList.add(i * 10 + j);
                 cells.push($td);
                 $tr.append($td);
@@ -76,24 +79,26 @@
         const copyFlatted = flattedArray.concat();
         const randomArray = [];
         const mineArray = [];
-        function shuffle() {
-            for (let i = 0; i < arrayWidth; i++) {
+        function shuffleMine() {
+            for (let i = 0; i < arrayWidth; i++) { // 랜덤 지뢰 배열만들기.
                 const randomIndex = flattedArray.splice(Math.floor(Math.random() * flattedArray.length), 1);
                 randomArray.push(randomIndex);
             }
             const flattedRandom = randomArray.flat();
-            for (let j = 0; j < numMine; j++) {
+            for (let j = 0; j < numMine; j++) { // 지뢰 배열 만들고, id, 텍스트 달아주기.
                 mineArray.push(flattedRandom[j]);
                 mineArray[j].id = "mine";
-                mineArray[j].textContent = '펑!';
             }
         }
-        function plantMine() {
-            shuffle();
-            const mineTd = document.querySelectorAll('td#mine');
-        }
-        plantMine();
-        console.log(rows)
+        shuffleMine();
+
+        function makeVisible() {
+            if (this.id === 'mine') {
+                this.style.color = 'white';
+                this.style.background = 'black';
+                this.textContent = '펑!';
+            };
+        };
         console.log(mineArray)
     </script>
 </body>
