@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Que pasa</title>
     <style>
         table {
             border-collapse: collapse;
@@ -26,10 +26,6 @@
         td.flag {
             background: red;
         }
-
-        td.question {
-            background: orange;
-        }
     </style>
 </head>
 
@@ -46,20 +42,41 @@
         const rows = [];
         const numRows = 10;
         const numClos = 10;
-        const mine = 10;
+        const arrayWidth = numRows * numClos;
+        const numMine = 10;
 
         for (let i = 0; i < numRows; i++) {
             const $tr = document.createElement('tr');
             const cells = [];
             for (let j = 0; j < numClos; j++) {
                 const $td = document.createElement('td');
+                $td.classList.add(i * 10 + j);
                 cells.push($td);
                 $tr.append($td);
             }
             rows.push(cells);
             $tbody.append($tr);
         };
-        console.log(rows)
+
+        const flattedArray = rows.flat();
+        const copyFlatted = flattedArray.concat();
+        const randomArray = [];
+        const mineArray = [];
+        function shuffle() {
+            for (let i = 0; i < arrayWidth; i++) {
+                const randomIndex = flattedArray.splice(Math.floor(Math.random() * flattedArray.length), 1);
+                randomArray.push(randomIndex);
+            }
+            const flattedRandom = randomArray.flat();
+            for (let j = 0; j < numMine; j++) {
+                const inputMine = mineArray.push(flattedRandom[j]);
+                mineArray[j].id = "mine";
+            }
+        }
+        function plantMine(){
+            shuffle();
+            copyFlatted
+        }
     </script>
 </body>
 
