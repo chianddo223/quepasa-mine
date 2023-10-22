@@ -19,6 +19,8 @@
         }
 
         td {
+            font-family: 'CookieRun-Regular';
+            font-size: 6vw;
             border: 1vw solid #bbb;
             text-align: center;
             line-height: 20px;
@@ -28,11 +30,8 @@
         }
 
         td#mine {
-            font-family: 'CookieRun-Regular';
-            font-size: 6vw;
             color: #888;
             background: #888;
-            border-radius: 131%;
         }
 
         td.opened {
@@ -67,6 +66,7 @@
             for (let j = 0; j < numClos; j++) { // 각각의 td가 생성되면서 특성부여받음.
                 const $td = document.createElement('td');
                 $td.addEventListener('click', makeVisible);
+                $td.addEventListener('contextmenu', fillRed);
                 $td.classList.add(i * 10 + j);
                 cells.push($td);
                 $tr.append($td);
@@ -96,10 +96,22 @@
             if (this.id === 'mine') {
                 this.style.color = 'white';
                 this.style.background = 'black';
-                this.textContent = '펑!';
+                this.textContent = '💥';
             };
         };
-        console.log(mineArray)
+
+        function fillRed() {
+            event.preventDefault();
+            if (this.style.background === 'red') {
+                this.style.background = '#888';
+                this.textContent = '';
+            } else {
+                this.style.background = 'red';
+                this.style.color = 'black';
+                this.textContent = '⚠️';
+            };
+        };
+        console.log(mineArray);
     </script>
 </body>
 
