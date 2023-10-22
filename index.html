@@ -11,11 +11,11 @@
         }
 
         td {
-            border: 1px solid #bbb;
+            border: 1vw solid #bbb;
             text-align: center;
             line-height: 20px;
-            width: 20px;
-            height: 20px;
+            width: 8vw;
+            height: 8vw;
             background: #888;
         }
 
@@ -43,6 +43,23 @@
     <script>
         const $tbody = document.querySelector('#table tbody');
         const $result = document.querySelector('#result');
+        const rows = [];
+        const numRows = 10;
+        const numClos = 10;
+        const mine = 10;
+
+        for (let i = 0; i < numRows; i++) {
+            const $tr = document.createElement('tr');
+            const cells = [];
+            for (let j = 0; j < numClos; j++) {
+                const $td = document.createElement('td');
+                cells.push($td);
+                $tr.append($td);
+            }
+            rows.push(cells);
+            $tbody.append($tr);
+        };
+        console.log(rows)
     </script>
 </body>
 
