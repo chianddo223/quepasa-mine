@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Que pasa</title>
     <style>
+        @font-face {
+            font-family: 'CookieRun-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         table {
             border-collapse: collapse;
         }
@@ -17,6 +24,13 @@
             width: 8vw;
             height: 8vw;
             background: #888;
+        }
+
+        td#mine {
+            font-family: 'CookieRun-Regular';
+            font-size: 6vw;
+            color: white;
+            background: black;
         }
 
         td.opened {
@@ -69,14 +83,18 @@
             }
             const flattedRandom = randomArray.flat();
             for (let j = 0; j < numMine; j++) {
-                const inputMine = mineArray.push(flattedRandom[j]);
+                mineArray.push(flattedRandom[j]);
                 mineArray[j].id = "mine";
+                mineArray[j].textContent = '펑!';
             }
         }
-        function plantMine(){
+        function plantMine() {
             shuffle();
-            copyFlatted
+            const mineTd = document.querySelectorAll('td#mine');
         }
+        plantMine();
+        console.log(rows)
+        console.log(mineArray)
     </script>
 </body>
 
